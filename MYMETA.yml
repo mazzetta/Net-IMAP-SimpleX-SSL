@@ -1,0 +1,24 @@
+---
+abstract: 'SSL support for Net::IMAP::SimpleX'
+author:
+  - 'Danilo Abbasciano <piuma@piumalab.org>'
+build_requires:
+  ExtUtils::MakeMaker: 0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 0
+generated_by: 'ExtUtils::MakeMaker version 6.72, CPAN::Meta::Converter version 2.132140'
+license: unknown
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Net-IMAP-SimpleX-SSL
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  IO::Socket::SSL: 0
+  Net::IMAP::SimpleX: 0.95
+  Test::More: 0
+version: 1.3
