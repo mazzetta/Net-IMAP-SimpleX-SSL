@@ -3,24 +3,42 @@ NAME
 
 SYNOPSIS
       use Net::IMAP::SimpleX::SSL;
-      my $imap = Net::IMAP::SimpleX::SSL->new($server);
+
+      my $imap = Net::IMAP::SimpleX::SSL->new(
+         $server,
+	 use_ssl => 1,
+	 port => 993,
+         # debug => 1,
+	 ssl_options => [
+            SSL_verify_mode => IO::Socket::SSL::SSL_VERIFY_NONE(),
+            verify_hostname => 0,
+            SSL_ca_file => "certs/my-ca.pem",
+      ]) || die "Error: Unable to connect to IMAP server $imap : $Net::IMAP::Simple::errstr";
+      
+      if (!$imap->login($user, $pass)) {
+         print "Error: IMAP Authentication failed";
+	 print $imap->errstr;
+      }
   
-      $imap->login($user => $pass);
-  
-      my $total_messages = $imap->select("perl-advocacy");
+      $imap->select("INBOX");
+
+      ($ret, $MessageId) = $imap->fetch($msg_number => "BODY[HEADER.FIELDS (MESSAGE-ID)]");
+      $MessageId = $MessageId->{"BODY[HEADER.FIELDS (MESSAGE-ID)]"};
 
 DESCRIPTION
-    This module is a subclass of Net::IMAP::SImple that includes SSL
-    support. The interface is identical.
+    This module is a subclass of Net::IMAP::SimpleX that includes SSL
+    support. Net::IMAP::SimpleX is a collection of handy methods that
+    are not simple. The interface is identical.
 
 SEE ALSO
-    Net::IMAP::SimpleX, IO::Socket::SSL, perl.
+    Net::IMAP::SimpleX, Net::IMAP::Simple, Net::IMAP::Simple::SSL,
+    IO::Socket::SSL, perl.
 
 AUTHOR
-    Casey West, <casey@geeknest.com>.
+    Danilo Abbasciano <danilo@piumalab.org>,
+    derivate from Casey West <casey@geeknest.com> module.
 
 COPYRIGHT
       Copyright (c) 2004 Casey West.  All rights reserved.
       This module is free software; you can redistribute it and/or modify it
       under the same terms as Perl itself.
-
