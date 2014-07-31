@@ -30,6 +30,11 @@ DESCRIPTION
     support. Net::IMAP::SimpleX is a collection of handy methods that
     are not simple. The interface is identical.
 
+INSTALL
+    The latest version of cpanm can install directly from github!
+
+    # cpanm git://github.com/mazzetta/Net-IMAP-SimpleX-SSL.git
+
 SEE ALSO
     Net::IMAP::SimpleX, Net::IMAP::Simple, Net::IMAP::Simple::SSL,
     IO::Socket::SSL, perl.
